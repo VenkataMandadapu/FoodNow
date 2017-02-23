@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="foodnow.foodnow.add_restaurant"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:id="@+id/AddRestaurant"
+            app:title="Welcome Owner" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <TextView
+        android:text="Add Restaurant"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="4dp"
+        android:id="@+id/title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:fontFamily="serif"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_dark" />
+
+    <MultiAutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:id="@+id/restaurantname"
+        android:text="Name" />
+
+    <MultiAutoCompleteTextView
+        android:text="Cuisine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:id="@+id/Cuisine" />
+
+    <MultiAutoCompleteTextView
+        android:text="Location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Location" />
+
+    <MultiAutoCompleteTextView
+        android:text="Phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Phone" />
+
+    <MultiAutoCompleteTextView
+        android:text="Website"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:id="@+id/Website" />
+
+    <Button
+        android:text="Add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:id="@+id/addrestaurantbutton" />
+
+
+</LinearLayout>

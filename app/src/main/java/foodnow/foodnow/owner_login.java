@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +24,7 @@ import layout.owner_singup;
 import android.widget.TextView;
 
 public class owner_login extends AppCompatActivity {
+    private final String LOG_TAG = getClass().getSimpleName();
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -41,6 +43,7 @@ public class owner_login extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(LOG_TAG,"In owner_login On Create");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_login);
 
@@ -89,6 +92,29 @@ public class owner_login extends AppCompatActivity {
             }
         });*/
 
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        Log.d(LOG_TAG,"In owner_login On Resume");
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        Log.d(LOG_TAG,"In owner_login On Pause");
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        Log.d(LOG_TAG,"In owner_login On Stop");
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        Log.d(LOG_TAG,"In owner_login On Destroy");
     }
 
 

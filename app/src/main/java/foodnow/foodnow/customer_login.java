@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,11 +19,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import layout.customer_signup;
 import layout.customer_logon;
+import android.util.Log;
 
 import android.widget.TextView;
 
 public class customer_login extends AppCompatActivity {
-
+    private final String LOG_TAG = getClass().getSimpleName();
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -31,7 +33,7 @@ public class customer_login extends AppCompatActivity {
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    //private SectionsPagerAdapter mSectionsPagerAdapter;
+    //private SectionsPagerAdapter mSecionsPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -40,8 +42,11 @@ public class customer_login extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(LOG_TAG,"In Customer_login: On Create");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_login);
+
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -93,6 +98,29 @@ public class customer_login extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        Log.d(LOG_TAG,"In Customer_login On Resume");
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        Log.d(LOG_TAG,"In Customer_login On Pause");
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        Log.d(LOG_TAG,"In Customer_login On Stop");
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        Log.d(LOG_TAG,"In Customer_login On Destroy");
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

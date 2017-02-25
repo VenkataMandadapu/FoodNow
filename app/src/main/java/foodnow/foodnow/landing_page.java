@@ -26,7 +26,7 @@ public class landing_page extends AppCompatActivity {
         mBtnOwner = (Button) findViewById(R.id.Owner);
         mBtnGuest = (Button) findViewById(R.id.Guest);
         setSupportActionBar(toolbar);
-        Log.d(LOG_TAG,"In Main On Create");
+        Log.d(LOG_TAG,"In Home On Create");
 
 
         mBtnCustomer.setOnClickListener(new View.OnClickListener() {
@@ -61,25 +61,25 @@ public class landing_page extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        Log.d(LOG_TAG,"In Main On Resume");
+        Log.d(LOG_TAG,"In Home On Resume");
     }
 
     @Override
     public void onPause(){
         super.onPause();
-        Log.d(LOG_TAG,"In Main On Pause");
+        Log.d(LOG_TAG,"In Home On Pause");
     }
 
     @Override
     public void onStop(){
         super.onStop();
-        Log.d(LOG_TAG,"In Main On Stop");
+        Log.d(LOG_TAG,"In Home On Stop");
     }
 
     @Override
     public void onDestroy(){
         super.onDestroy();
-        Log.d(LOG_TAG,"In Main On Destroy");
+        Log.d(LOG_TAG,"In Home On Destroy");
     }
 
     @Override

@@ -2,7 +2,7 @@ package foodnow.foodnow.DatabaseModels;
 import foodnow.foodnow.Models.CapacityStatusEnum;
 import foodnow.foodnow.Models.UserTypeEnum;
 import foodnow.foodnow.Models.WaitStatusEnum;
-
+import foodnow.foodnow.Models.LocationCoordinates;
 /**
  * Created by vinee on 3/21/2017.
  */

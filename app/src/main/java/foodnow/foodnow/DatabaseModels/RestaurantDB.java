@@ -1,5 +1,8 @@
 package foodnow.foodnow.DatabaseModels;
 
+
+import foodnow.foodnow.Models.LocationCoordinates;
+
 /**
  * Created by vinee on 3/20/2017.
  */
@@ -11,6 +14,7 @@ public class RestaurantDB {
     private String Cuisine;
     private String Address;
     private String Phone;
+    private LocationCoordinates Coordinates;
 
     public void setRestaurantId(int RestaurantId) {
         this.RestaurantId = RestaurantId;
@@ -59,4 +63,13 @@ public class RestaurantDB {
     public String getPhone() {
         return Phone;
     }
+
+    public void setLocationCoordinates(LocationCoordinates Coordinates) {
+        this.Coordinates = Coordinates;
+    }
+
+    public LocationCoordinates getLocationCoordinates() {
+        return Coordinates;
+    }
+
 }

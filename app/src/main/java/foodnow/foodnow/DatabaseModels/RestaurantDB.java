@@ -7,69 +7,76 @@ import foodnow.foodnow.Models.LocationCoordinates;
  * Created by vinee on 3/20/2017.
  */
 
-public class RestaurantDB {
-    private int RestaurantId;
-    private String RestaurantName;
+public class RestaurantDB implements Comparable<RestaurantDB>{
+    private String Name;
     private String OwnerId;
     private String Cuisine;
     private String Address;
     private String Phone;
     private LocationCoordinates Coordinates;
+    private Double Distance;
 
-    public void setRestaurantId(int RestaurantId) {
-        this.RestaurantId = RestaurantId;
+    public RestaurantDB() {
     }
 
-    public int getRestaurantId() {
-        return RestaurantId;
+    public String getName() {
+        return Name;
     }
 
-    public void setRestaurantName(String RestaurantName) {
-        this.RestaurantName = RestaurantName;
+    public void setName(String name) {
+        Name = name;
     }
 
-    public String getRestaurantName() {
-        return RestaurantName;
+    public Double getDistance() {
+        return Distance;
     }
 
-    public void setOwnerId(String OwnerId) {
-        this.OwnerId = OwnerId;
+    public void setDistance(Double distance) {
+        Distance = distance;
     }
 
     public String getOwnerId() {
         return OwnerId;
     }
 
-    public void setCuisine(String Cuisine) {
-        this.Cuisine = Cuisine;
+    public void setOwnerId(String ownerId) {
+        OwnerId = ownerId;
     }
 
     public String getCuisine() {
         return Cuisine;
     }
 
-    public void setAddress(String Address) {
-        this.Address = Address;
+    public void setCuisine(String cuisine) {
+        Cuisine = cuisine;
     }
 
     public String getAddress() {
         return Address;
     }
 
-    public void setPhone(String Phone) {
-        this.Phone = Phone;
+    public void setAddress(String address) {
+        Address = address;
     }
 
     public String getPhone() {
         return Phone;
     }
 
-    public void setLocationCoordinates(LocationCoordinates Coordinates) {
-        this.Coordinates = Coordinates;
+    public void setPhone(String phone) {
+        Phone = phone;
     }
 
-    public LocationCoordinates getLocationCoordinates() {
+    public LocationCoordinates getCoordinates() {
         return Coordinates;
     }
 
+    public void setCoordinates(LocationCoordinates coordinates) {
+        Coordinates = coordinates;
+    }
+
+    @Override
+    public int compareTo(RestaurantDB o) {
+        return Double.compare(this.Distance,o.Distance);
+    }
 }

@@ -19,7 +19,7 @@ import android.widget.Toast;
 //import com.example.aj.scavengersworld.Model.User;
 import foodnow.foodnow.Activities.Screens.CustomerHome;
 import foodnow.foodnow.R;
-//import com.example.aj.scavengersworld.UserSessionManager;
+import foodnow.foodnow.Activities.Sessions.SessionManager;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -138,7 +138,7 @@ public class CustomerLoginFragment extends Fragment implements View.OnClickListe
                 if(mFirebaseUser != null){
                     // User is signed in
                     Log.d(LOG_TAG, "onAuthStateChanged:signed_in:" + mFirebaseUser.getUid());
-                    //setupSession();
+                    setupSession();
                     openHomeScreenCustomerLogin();
                 }
                 else{
@@ -412,12 +412,12 @@ public class CustomerLoginFragment extends Fragment implements View.OnClickListe
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-/*
+
     private void setupSession(){
-        UserSessionManager sessionManager = UserSessionManager.INSTANCE;
+        SessionManager sessionManager = SessionManager.INSTANCE;
         sessionManager.setUpSession(mFirebaseUser, getContext());
     }
-*/
+
     private void loginFailed(Task<AuthResult> task){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(task.getException().getMessage())

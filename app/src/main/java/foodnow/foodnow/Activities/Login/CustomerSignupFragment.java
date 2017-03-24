@@ -1,5 +1,6 @@
 package foodnow.foodnow.Activities.Login;
 
+import foodnow.foodnow.Activities.Sessions.SessionManager;
 import foodnow.foodnow.R;
 import foodnow.foodnow.Activities.Screens.CustomerHome;
 import android.support.v4.app.Fragment;
@@ -15,9 +16,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-//import com.example.aj.scavengersworld.Activities.HomeScreen.HomeScreenActivity;
-//import com.example.aj.scavengersworld.Model.User;
-//import com.example.aj.scavengersworld.UserSessionManager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -65,7 +63,7 @@ public class CustomerSignupFragment extends Fragment implements View.OnClickList
                 if(mFirebaseUser != null){
                     // User is signed in
                     Log.d(LOG_TAG, "onAuthStateChanged:signed_in:" + mFirebaseUser.getUid());
-                    //setupSession();
+                    setupSession();
                     openHomeScreenCustomerSignup();
                 }
                 else{
@@ -242,9 +240,9 @@ public class CustomerSignupFragment extends Fragment implements View.OnClickList
         startActivity(homeScreen);
     }
 
-   /* private void setupSession(){
-        UserSessionManager sessionManager = UserSessionManager.INSTANCE;
+    private void setupSession(){
+        SessionManager sessionManager = SessionManager.INSTANCE;
         sessionManager.setUpSession(mFirebaseUser, getContext());
     }
-    */
+
 }

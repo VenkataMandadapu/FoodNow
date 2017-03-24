@@ -16,11 +16,6 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 
-import foodnow.foodnow.customer_home;
-import foodnow.foodnow.customer_login;
-import foodnow.foodnow.landing_page;
-import foodnow.foodnow.owner_login;
-
 /**
  * Created by vinee on 3/18/2017.
  */

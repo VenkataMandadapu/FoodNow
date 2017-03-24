@@ -5,4 +5,5 @@ package foodnow.foodnow.Activities.Sessions;
  */
 
 public class SessionActivity {
+
 }

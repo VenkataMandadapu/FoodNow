@@ -66,7 +66,7 @@ public class CustomerSignupFragment extends Fragment implements View.OnClickList
                     // User is signed in
                     Log.d(LOG_TAG, "onAuthStateChanged:signed_in:" + mFirebaseUser.getUid());
                     //setupSession();
-                    openHomeScreen();
+                    openHomeScreenCustomerSignup();
                 }
                 else{
                     // User is signed out
@@ -237,7 +237,7 @@ public class CustomerSignupFragment extends Fragment implements View.OnClickList
     }
 
 
-  private void openHomeScreen(){
+  private void openHomeScreenCustomerSignup(){
         Intent homeScreen = new Intent(getActivity(), CustomerHome.class);
         startActivity(homeScreen);
     }

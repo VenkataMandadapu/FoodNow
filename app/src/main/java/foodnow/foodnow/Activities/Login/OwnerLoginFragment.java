@@ -15,12 +15,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.example.aj.scavengersworld.Activities.HomeScreen.HomeScreenActivity;
-//import com.example.aj.scavengersworld.Model.User;
+
 import foodnow.foodnow.Activities.Screens.CustomerHome;
 import foodnow.foodnow.Activities.Screens.OwnerHome;
+import foodnow.foodnow.Activities.Sessions.SessionManager;
 import foodnow.foodnow.R;
-//import com.example.aj.scavengersworld.UserSessionManager;
+
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -139,7 +139,7 @@ public class OwnerLoginFragment extends Fragment implements View.OnClickListener
                 if(mFirebaseUser != null){
                     // User is signed in
                     Log.d(LOG_TAG, "onAuthStateChanged:signed_in:" + mFirebaseUser.getUid());
-                    //setupSession();
+                    setupSession();
                     openHomeScreenOwnerLogin();
                 }
                 else{
@@ -413,12 +413,12 @@ public class OwnerLoginFragment extends Fragment implements View.OnClickListener
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-    /*
+
         private void setupSession(){
-            UserSessionManager sessionManager = UserSessionManager.INSTANCE;
+            SessionManager sessionManager = SessionManager.INSTANCE;
             sessionManager.setUpSession(mFirebaseUser, getContext());
         }
-    */
+
     private void loginFailed(Task<AuthResult> task){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(task.getException().getMessage())

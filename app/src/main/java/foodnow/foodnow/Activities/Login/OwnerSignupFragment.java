@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import foodnow.foodnow.Activities.Screens.OwnerHome;
+import foodnow.foodnow.Activities.Sessions.SessionManager;
 import foodnow.foodnow.R;
 
 
@@ -62,7 +63,7 @@ public class OwnerSignupFragment extends Fragment implements View.OnClickListene
                 if(mFirebaseUser != null){
                     // User is signed in
                     Log.d(LOG_TAG, "onAuthStateChanged:signed_in:" + mFirebaseUser.getUid());
-                    //setupSession();
+                    setupSession();
                     openHomeScreenOwnerSignup();
                 }
                 else{
@@ -239,9 +240,9 @@ public class OwnerSignupFragment extends Fragment implements View.OnClickListene
         startActivity(homeScreen);
     }
 
-   /* private void setupSession(){
-        UserSessionManager sessionManager = UserSessionManager.INSTANCE;
+    private void setupSession(){
+         SessionManager sessionManager = SessionManager.INSTANCE;
         sessionManager.setUpSession(mFirebaseUser, getContext());
     }
-    */
+
 }

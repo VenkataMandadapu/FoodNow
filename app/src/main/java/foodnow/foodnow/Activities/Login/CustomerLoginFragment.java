@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.example.aj.scavengersworld.Activities.HomeScreen.HomeScreenActivity;
+
 //import com.example.aj.scavengersworld.Model.User;
 import foodnow.foodnow.Activities.Screens.CustomerHome;
 import foodnow.foodnow.R;
@@ -139,7 +139,7 @@ public class CustomerLoginFragment extends Fragment implements View.OnClickListe
                     // User is signed in
                     Log.d(LOG_TAG, "onAuthStateChanged:signed_in:" + mFirebaseUser.getUid());
                     //setupSession();
-                    openHomeScreen();
+                    openHomeScreenCustomerLogin();
                 }
                 else{
                     // User is signed out
@@ -341,7 +341,7 @@ public class CustomerLoginFragment extends Fragment implements View.OnClickListe
         Log.d(LOG_TAG, "onActivityCreated()");
         restoreUIVariables(savedInstanceState);
         if(mFirebaseUser != null){
-            openHomeScreen();
+            openHomeScreenCustomerLogin();
         }
     }
 
@@ -399,8 +399,8 @@ public class CustomerLoginFragment extends Fragment implements View.OnClickListe
         }
     }
 
-    private void openHomeScreen(){
-        Log.d(LOG_TAG, "openHomeScreen() called");
+    private void openHomeScreenCustomerLogin(){
+        Log.d(LOG_TAG, "openHomeScreenCustomerLogin() called");
         Intent homeScreen = new Intent(getActivity(), CustomerHome.class);
         homeScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         homeScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

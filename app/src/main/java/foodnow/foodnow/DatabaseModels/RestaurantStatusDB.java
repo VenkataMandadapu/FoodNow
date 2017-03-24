@@ -8,68 +8,53 @@ import foodnow.foodnow.Models.LocationCoordinates;
  */
 
 public class RestaurantStatusDB {
-    private int RestaurantId;
-    private String UserId;
-    private CapacityStatusEnum CapacityStatus;
-    private WaitStatusEnum WaitStatus;
-    private int NumberOfUpdates;
-    private String TimeStamp;
-    private UserTypeEnum UserType;
+    private String name;
+    private CapacityStatusEnum capacityStatus;
+    private WaitStatusEnum waitStatus;
+    private int numberOfUpdates;
+    private Long timeStamp;
 
-    public void setRestaurantId(int RestaurantId) {
-        this.RestaurantId = RestaurantId;
+    public Long getTimeStamp() {
+        return timeStamp;
     }
 
-    public int getRestaurantId() {
-        return RestaurantId;
+    public void setTimeStamp(Long timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
-    public void setUserId(String UserId) {
-        this.UserId = UserId;
+    public RestaurantStatusDB() {
+
     }
 
-    public String getUserId() {
-        return UserId;
+    public String getName() {
+        return name;
     }
 
-    public void setCapacityStatus(CapacityStatusEnum CapacityStatus) {
-        this.CapacityStatus = CapacityStatus;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public CapacityStatusEnum getCapacityStatus() {
-        return CapacityStatus;
+        return capacityStatus;
     }
 
-    public void setWaitStatus(WaitStatusEnum WaitStatus) {
-        this.WaitStatus = WaitStatus;
+    public void setCapacityStatus(CapacityStatusEnum capacityStatus) {
+        this.capacityStatus = capacityStatus;
     }
 
     public WaitStatusEnum getWaitStatus() {
-        return WaitStatus;
+        return waitStatus;
     }
 
-    public void setNumberOfUpdates(int NumberOfUpdates) {
-        this.NumberOfUpdates = NumberOfUpdates;
+    public void setWaitStatus(WaitStatusEnum waitStatus) {
+        this.waitStatus = waitStatus;
     }
 
     public int getNumberOfUpdates() {
-        return NumberOfUpdates;
+        return numberOfUpdates;
     }
 
-    public void setTimeStamp(String TimeStamp) {
-        this.TimeStamp = TimeStamp;
+    public void setNumberOfUpdates(int numberOfUpdates) {
+        this.numberOfUpdates = numberOfUpdates;
     }
-
-    public String getTimeStamp() {
-        return TimeStamp;
-    }
-
-    public void setUserType (UserTypeEnum UserType) {
-        this.UserType = UserType;
-    }
-
-    public UserTypeEnum getUserType () {
-        return UserType;
-    }
-
 }

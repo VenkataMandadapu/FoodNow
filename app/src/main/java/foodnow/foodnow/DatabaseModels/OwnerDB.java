@@ -6,31 +6,31 @@ import foodnow.foodnow.Models.UserTypeEnum;
  */
 
 public class OwnerDB {
-    private String OwnerId;
-    private String OwnerName;
-    private UserTypeEnum UserType;
-
-    public void setOwnerId(String OwnerId) {
-        this.OwnerId = OwnerId;
-    }
+    private String ownerId;
+    private String ownerName;
+    private UserTypeEnum userType;
 
     public String getOwnerId() {
-        return OwnerId;
+        return ownerId;
     }
 
-    public void setOwnerName(String OwnerName) {
-        this.OwnerName = OwnerName;
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getOwnerName() {
-        return OwnerName;
+        return ownerName;
     }
 
-    public void setUserType (UserTypeEnum UserType) {
-        this.UserType = UserType;
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 
-    public UserTypeEnum getUserType () {
-        return UserType;
+    public UserTypeEnum getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserTypeEnum userType) {
+        this.userType = userType;
     }
 }

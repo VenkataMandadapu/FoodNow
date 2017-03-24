@@ -5,5 +5,5 @@ package foodnow.foodnow.Models;
  */
 
 public enum WaitStatusEnum {
-    WAIT_15, WAIT_30, WAIT_45, WAIT_60
+    WAIT_0,WAIT_15, WAIT_30, WAIT_45, WAIT_60
 }

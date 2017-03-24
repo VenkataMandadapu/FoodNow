@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_search_restaurant"
+    android:id="@+id/activity_popular_restaurants"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -9,23 +9,13 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="foodnow.foodnow.Activities.Search.SearchRestaurant"
-    android:weightSum="1">
-
-    <AutoCompleteTextView
-        android:hint="  Search Restaurants"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/border"
-        android:id="@+id/searchRestaurant"
-        android:layout_weight="0.02"
-        />
+    tools:context="foodnow.foodnow.Activities.Search.PopularRestaurants">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/searchview"
+        android:id="@+id/popularview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
+
 </LinearLayout>

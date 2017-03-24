@@ -15,6 +15,7 @@ import android.view.View;
 
 import foodnow.foodnow.Activities.Login.CustomerLogin;
 import foodnow.foodnow.Activities.Search.NearbyRestaurants;
+import foodnow.foodnow.Activities.Search.PopularRestaurants;
 import foodnow.foodnow.Activities.Search.SearchRestaurant;
 import foodnow.foodnow.R;
 
@@ -43,6 +44,7 @@ public class CustomerHome extends AppCompatActivity {
 
         mBtnSearchRestaurant = (Button) findViewById(R.id.SearchRestaurant);
         mBtnNearbyRestaurant = (Button) findViewById(R.id.nearbyRestaurants);
+        mBtnPopularRestaurant = (Button) findViewById(R.id.popularRestaurants);
 
         mBtnSearchRestaurant.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +63,14 @@ public class CustomerHome extends AppCompatActivity {
                 startActivity(nearbyrestaurant);
 
 
+            }
+        });
+
+        mBtnPopularRestaurant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent popularrestaurant = new Intent(CustomerHome.this,PopularRestaurants.class);
+                startActivity(popularrestaurant);
             }
         });
 

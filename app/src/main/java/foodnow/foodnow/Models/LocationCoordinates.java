@@ -6,32 +6,31 @@ package foodnow.foodnow.Models;
  */
 
 public class LocationCoordinates {
-    private double Latitude;
-    private double Longitude;
+    private double latitude;
+    private double longitude;
 
     public LocationCoordinates(double mLatitude, double mLongitude) {
-        this.Latitude = mLatitude;
-        this.Longitude = mLongitude;
+        this.latitude = mLatitude;
+        this.longitude = mLongitude;
     }
 
     public LocationCoordinates() {
     }
 
     public double getLatitude() {
-
-        return Latitude;
+        return latitude;
     }
 
     public void setLatitude(double latitude) {
-        Latitude = latitude;
+        this.latitude = latitude;
     }
 
     public double getLongitude() {
-        return Longitude;
+        return longitude;
     }
 
     public void setLongitude(double longitude) {
-        Longitude = longitude;
+        this.longitude = longitude;
     }
 }
 

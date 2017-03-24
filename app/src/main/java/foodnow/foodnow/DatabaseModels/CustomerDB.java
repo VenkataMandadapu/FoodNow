@@ -6,31 +6,31 @@ import foodnow.foodnow.Models.UserTypeEnum;
  */
 
 public class CustomerDB {
-    private String CustomerId;
-    private String CustomerName;
-    private UserTypeEnum UserType;
-
-    public void setCustomerId(String CustomerId) {
-        this.CustomerId = CustomerId;
-    }
+    private String customerId;
+    private String customerName;
+    private UserTypeEnum userType;
 
     public String getCustomerId() {
-        return CustomerId;
+        return customerId;
     }
 
-    public void setCustomerName(String CustomerName) {
-        this.CustomerName = CustomerName;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     public String getCustomerName() {
-        return CustomerName;
+        return customerName;
     }
 
-    public void setUserType (UserTypeEnum UserType) {
-        this.UserType = UserType;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public UserTypeEnum getUserType () {
-        return UserType;
+    public UserTypeEnum getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserTypeEnum userType) {
+        this.userType = userType;
     }
 }

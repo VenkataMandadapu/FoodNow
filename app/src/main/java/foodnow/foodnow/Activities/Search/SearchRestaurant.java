@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import foodnow.foodnow.DatabaseModels.RestaurantDB;
+import foodnow.foodnow.Models.LocationCoordinates;
 import foodnow.foodnow.R;
 
 public class SearchRestaurant extends AppCompatActivity {

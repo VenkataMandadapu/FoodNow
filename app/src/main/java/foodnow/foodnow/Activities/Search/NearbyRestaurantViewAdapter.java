@@ -56,6 +56,7 @@ public class NearbyRestaurantViewAdapter extends RecyclerView.Adapter<NearbyRest
                 }*/
                 Intent openRestaurant = new Intent(v.getContext(),RestaurantStatus.class);
                 openRestaurant.putExtra("RestaurantId",restaurant.getName());
+                openRestaurant.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 v.getContext().startActivity(openRestaurant);
             }
         });

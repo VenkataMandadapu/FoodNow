@@ -7,76 +7,71 @@ import foodnow.foodnow.Models.LocationCoordinates;
  * Created by vinee on 3/20/2017.
  */
 
-public class RestaurantDB implements Comparable<RestaurantDB>{
-    private String Name;
-    private String OwnerId;
-    private String Cuisine;
-    private String Address;
-    private String Phone;
-    private LocationCoordinates Coordinates;
-    private Double Distance;
+public class RestaurantDB{
+    private String name;
+    private String ownerId;
+    private String cuisine;
+    private String address;
+    private String phone;
+    private LocationCoordinates coordinates;
+    private Double distance;
 
     public RestaurantDB() {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
-    }
-
-    public Double getDistance() {
-        return Distance;
-    }
-
-    public void setDistance(Double distance) {
-        Distance = distance;
+        this.name = name;
     }
 
     public String getOwnerId() {
-        return OwnerId;
+        return ownerId;
     }
 
     public void setOwnerId(String ownerId) {
-        OwnerId = ownerId;
+        this.ownerId = ownerId;
     }
 
     public String getCuisine() {
-        return Cuisine;
+        return cuisine;
     }
 
     public void setCuisine(String cuisine) {
-        Cuisine = cuisine;
+        this.cuisine = cuisine;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
     }
 
     public String getPhone() {
-        return Phone;
+        return phone;
     }
 
     public void setPhone(String phone) {
-        Phone = phone;
+        this.phone = phone;
     }
 
     public LocationCoordinates getCoordinates() {
-        return Coordinates;
+        return coordinates;
     }
 
     public void setCoordinates(LocationCoordinates coordinates) {
-        Coordinates = coordinates;
+        this.coordinates = coordinates;
     }
 
-    @Override
-    public int compareTo(RestaurantDB o) {
-        return Double.compare(this.Distance,o.Distance);
+    public Double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Double distance) {
+        this.distance = distance;
     }
 }

@@ -74,7 +74,9 @@
         <activity android:name=".Activities.Login.OwnerLogin" />
         <activity android:name=".Activities.Search.NearbyRestaurants" />
         <activity android:name=".Activities.Screens.RestaurantStatus" />
-        <activity android:name=".Activities.Search.SearchRestaurant"></activity>
+        <activity android:name=".Activities.Search.SearchRestaurant" />
+        <activity android:name=".Activities.Screens.UpdateStatus" />
+        <activity android:name=".Activities.Search.PopularRestaurants"></activity>
     </application>
 
 </manifest>

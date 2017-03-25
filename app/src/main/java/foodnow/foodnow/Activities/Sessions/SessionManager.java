@@ -9,16 +9,9 @@ import com.google.firebase.auth.FirebaseUser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +19,7 @@ import android.support.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseUser;
 
+import foodnow.foodnow.Models.UserTypeEnum;
 
 
 /**
@@ -40,10 +34,18 @@ public enum SessionManager {
     private String mUniqueUserId;
     private String mUserName;
     private String mUserEmail;
+    private UserTypeEnum mUserType;
 
     private Context mContext;
     private String userProfileKey;
 
+    public void setmUserType (UserTypeEnum mUserType) {
+        this.mUserType = mUserType;
+    }
+
+    public UserTypeEnum getmUserType() {
+        return mUserType;
+    }
 
     public boolean isLoggedIn(){
         return this.mFirebaseUser != null;

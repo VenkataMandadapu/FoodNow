@@ -50,6 +50,8 @@ public class CustomerHome extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent searchrestaurant = new Intent(CustomerHome.this,SearchRestaurant.class);
+                searchrestaurant.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                searchrestaurant.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(searchrestaurant);
 
 
@@ -60,6 +62,8 @@ public class CustomerHome extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent nearbyrestaurant = new Intent(CustomerHome.this,NearbyRestaurants.class);
+                nearbyrestaurant.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                nearbyrestaurant.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(nearbyrestaurant);
 
 
@@ -70,6 +74,9 @@ public class CustomerHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent popularrestaurant = new Intent(CustomerHome.this,PopularRestaurants.class);
+                popularrestaurant.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                popularrestaurant.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(popularrestaurant);
             }
         });

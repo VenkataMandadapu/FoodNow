@@ -16,7 +16,7 @@
 
     <!-- GOOGLE -->
     <string name="signed_in_fmt">Signed in as: %s</string>
-    <string name="server_client_id" translatable="false">435212579805-gvug6do3kbp6q6dkuchsa27u367sbj7p.apps.googleusercontent.com</string>
+    <string name="server_client_id" translatable="false">249625424616-lts6vdja2hum0bu16hkdasv4o5gjrhj5.apps.googleusercontent.com</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

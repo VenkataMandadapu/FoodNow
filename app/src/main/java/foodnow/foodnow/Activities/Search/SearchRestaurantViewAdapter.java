@@ -20,12 +20,10 @@ import foodnow.foodnow.R;
 public class SearchRestaurantViewAdapter extends RecyclerView.Adapter<SearchRestaurantViewAdapter.ViewHolder> {
 
     private final ArrayList<String> mValues;
-    private final NearbyRestaurants.OnListFragmentInteractionListener mListener;
     private final ColorGenerator mGenerator = ColorGenerator.MATERIAL;
 
-    public SearchRestaurantViewAdapter(ArrayList<String> items, NearbyRestaurants.OnListFragmentInteractionListener listener) {
+    public SearchRestaurantViewAdapter(ArrayList<String> items) {
         mValues = items;
-        mListener = listener;
     }
 
     @Override

@@ -7,6 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +31,6 @@ public class SearchRestaurant extends AppCompatActivity {
     private final String LOG_TAG = getClass().getSimpleName();
     RecyclerView searchview;
     int searchcount = 1;
-    private NearbyRestaurants.OnListFragmentInteractionListener mListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,11 +68,10 @@ public class SearchRestaurant extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //String input = s.toString();
+                String t = s.toString().toLowerCase();
                 ArrayList<String> matches = new ArrayList<>();
-                //Pattern p = Pattern.compile(input);
                 for (String d : allRestaurants){
-                    if(d.contains(s)){
+                    if(d.toLowerCase().contains(t)){
                         matches.add(d);
                     }
                 }
@@ -78,7 +79,7 @@ public class SearchRestaurant extends AppCompatActivity {
                 if (searchcount <= 1){
                     searchview.setLayoutManager(new LinearLayoutManager(SearchRestaurant.this));
                 }
-                searchview.setAdapter(new SearchRestaurantViewAdapter(matches,mListener));
+                searchview.setAdapter(new SearchRestaurantViewAdapter(matches));
 
             }
 
@@ -87,5 +88,23 @@ public class SearchRestaurant extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                return true;
+        }
+
+        return true;
     }
 }

@@ -19,8 +19,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+
 import foodnow.foodnow.Activities.Screens.OwnerHome;
 import foodnow.foodnow.Activities.Sessions.SessionManager;
+import foodnow.foodnow.Models.UserTypeEnum;
 import foodnow.foodnow.R;
 
 
@@ -242,7 +244,7 @@ public class OwnerSignupFragment extends Fragment implements View.OnClickListene
 
     private void setupSession(){
          SessionManager sessionManager = SessionManager.INSTANCE;
-        sessionManager.setUpSession(mFirebaseUser, getContext());
+        sessionManager.setUpSession(mFirebaseUser, getContext(), UserTypeEnum.OWNER);
     }
 
 }

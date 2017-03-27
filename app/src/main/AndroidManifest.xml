@@ -64,13 +64,15 @@
         <activity android:name=".Activities.Login.CustomerLogin" />
         <activity android:name=".Activities.Screens.CustomerHome" />
         <activity android:name=".Activities.Login.OwnerLogin" />
-        <activity android:name=".Activities.Screens.OwnerHome" />
         <activity android:name=".Activities.Screens.GuestHome" />
         <activity android:name=".Activities.Search.NearbyRestaurants" />
         <activity android:name=".Activities.Screens.RestaurantStatus" />
         <activity android:name=".Activities.Search.SearchRestaurant" />
         <activity android:name=".Activities.Screens.UpdateStatus" />
-        <activity android:name=".Activities.Search.PopularRestaurants"></activity>
+        <activity android:name=".Activities.Search.PopularRestaurants" />
+        <activity android:name=".Activities.Screens.OwnerHome" />
+        <activity android:name=".Activities.Screens.AddNewRestaurant" />
+        <activity android:name=".Activities.Screens.BaseActivity"></activity>
     </application>
 
 </manifest>

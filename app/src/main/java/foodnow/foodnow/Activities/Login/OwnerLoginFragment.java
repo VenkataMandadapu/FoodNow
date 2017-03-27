@@ -13,12 +13,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
-
-import foodnow.foodnow.Activities.Screens.CustomerHome;
 import foodnow.foodnow.Activities.Screens.OwnerHome;
 import foodnow.foodnow.Activities.Sessions.SessionManager;
+import foodnow.foodnow.Models.UserTypeEnum;
 import foodnow.foodnow.R;
 
 
@@ -416,7 +413,7 @@ public class OwnerLoginFragment extends Fragment implements View.OnClickListener
 
         private void setupSession(){
             SessionManager sessionManager = SessionManager.INSTANCE;
-            sessionManager.setUpSession(mFirebaseUser, getContext());
+            sessionManager.setUpSession(mFirebaseUser, getContext(), UserTypeEnum.OWNER);
         }
 
     private void loginFailed(Task<AuthResult> task){

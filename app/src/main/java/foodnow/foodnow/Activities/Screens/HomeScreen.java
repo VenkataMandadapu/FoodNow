@@ -2,6 +2,8 @@ package foodnow.foodnow.Activities.Screens;
 
 import foodnow.foodnow.Activities.Login.CustomerLogin;
 import foodnow.foodnow.Activities.Login.OwnerLogin;
+import foodnow.foodnow.Activities.Sessions.SessionManager;
+import foodnow.foodnow.Models.UserTypeEnum;
 import foodnow.foodnow.R;
 import android.content.Intent;
 import android.os.Bundle;
@@ -58,14 +60,15 @@ public class HomeScreen extends AppCompatActivity{
                 }
             });
 
-         /*   mBtnGuest.setOnClickListener(new View.OnClickListener() {
+            mBtnGuest.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent guest = new Intent(HomeScreen.this,customer_home.class);
+                    Intent guest = new Intent(HomeScreen.this,CustomerHome.class);
+                    setupSession();
                     startActivity(guest);
 
                 }
-            }); */
+            });
         }
         @Override
         public void onResume(){
@@ -112,6 +115,11 @@ public class HomeScreen extends AppCompatActivity{
 
             return super.onOptionsItemSelected(item);
         }
+
+    private void setupSession(){
+        SessionManager sessionManager = SessionManager.INSTANCE;
+        sessionManager.setUpSession(null, null, UserTypeEnum.GUEST);
+    }
 
 }
 

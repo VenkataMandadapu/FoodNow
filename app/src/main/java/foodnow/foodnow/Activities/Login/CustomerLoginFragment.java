@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 //import com.example.aj.scavengersworld.Model.User;
 import foodnow.foodnow.Activities.Screens.CustomerHome;
+import foodnow.foodnow.Models.UserTypeEnum;
 import foodnow.foodnow.R;
 import foodnow.foodnow.Activities.Sessions.SessionManager;
 
@@ -415,7 +416,7 @@ public class CustomerLoginFragment extends Fragment implements View.OnClickListe
 
     private void setupSession(){
         SessionManager sessionManager = SessionManager.INSTANCE;
-        sessionManager.setUpSession(mFirebaseUser, getContext());
+        sessionManager.setUpSession(mFirebaseUser, getContext(), UserTypeEnum.CUSTOMER);
     }
 
     private void loginFailed(Task<AuthResult> task){

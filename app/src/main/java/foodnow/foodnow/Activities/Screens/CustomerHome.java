@@ -11,6 +11,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import foodnow.foodnow.Activities.Login.CustomerLogin;
@@ -34,6 +37,7 @@ public class CustomerHome extends AppCompatActivity {
     Button mBtnSearchRestaurant;
     Button mBtnNearbyRestaurant;
     Button mBtnPopularRestaurant;
+    String usertype;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,24 @@ public class CustomerHome extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                return true;
+        }
+
+        return true;
     }
 
     @Override

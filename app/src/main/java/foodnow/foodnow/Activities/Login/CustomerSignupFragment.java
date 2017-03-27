@@ -1,6 +1,7 @@
 package foodnow.foodnow.Activities.Login;
 
 import foodnow.foodnow.Activities.Sessions.SessionManager;
+import foodnow.foodnow.Models.UserTypeEnum;
 import foodnow.foodnow.R;
 import foodnow.foodnow.Activities.Screens.CustomerHome;
 import android.support.v4.app.Fragment;
@@ -242,7 +243,7 @@ public class CustomerSignupFragment extends Fragment implements View.OnClickList
 
     private void setupSession(){
         SessionManager sessionManager = SessionManager.INSTANCE;
-        sessionManager.setUpSession(mFirebaseUser, getContext());
+        sessionManager.setUpSession(mFirebaseUser, getContext(), UserTypeEnum.CUSTOMER);
     }
 
 }

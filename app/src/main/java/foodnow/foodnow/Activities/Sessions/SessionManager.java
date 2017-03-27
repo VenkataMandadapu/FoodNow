@@ -26,6 +26,7 @@ import android.support.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseUser;
 
+import foodnow.foodnow.Models.UserTypeEnum;
 
 
 /**
@@ -40,10 +41,14 @@ public enum SessionManager {
     private String mUniqueUserId;
     private String mUserName;
     private String mUserEmail;
+    private UserTypeEnum usertype;
+
+    public UserTypeEnum getUsertype() {
+        return usertype;
+    }
 
     private Context mContext;
     private String userProfileKey;
-
 
     public boolean isLoggedIn(){
         return this.mFirebaseUser != null;
@@ -63,7 +68,7 @@ public enum SessionManager {
 
     public String getUserProfileKey(){ return this.userProfileKey; }
 
-    public void setUpSession(FirebaseUser firebaseUser, Context context){
+    public void setUpSession(FirebaseUser firebaseUser, Context context,UserTypeEnum type){
         if(firebaseUser != null && context != null){
             this.mContext = context;
             this.mFirebaseUser = firebaseUser;
@@ -71,6 +76,7 @@ public enum SessionManager {
             this.mUserName = firebaseUser.getDisplayName();
             this.mUserEmail = firebaseUser.getEmail();
         }
+        this.usertype = type;
     }
 
 

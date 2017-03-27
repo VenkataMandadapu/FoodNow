@@ -1,33 +1,97 @@
 package foodnow.foodnow.Activities.Screens;
 
 import android.content.Intent;
-import android.os.Bundle;
+import android.content.pm.PackageInstaller;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 import foodnow.foodnow.Activities.Search.NearbyRestaurants;
 import foodnow.foodnow.Activities.Search.SearchRestaurant;
+import foodnow.foodnow.Activities.Search.SearchRestaurantViewAdapter;
+import foodnow.foodnow.DatabaseModels.RestaurantDB;
 import foodnow.foodnow.R;
-
-/**
- * Created by vinee on 3/23/2017.
- */
+import foodnow.foodnow.Activities.Sessions.SessionManager;
 
 public class OwnerHome extends AppCompatActivity {
-    private final String LOG_TAG = getClass().getSimpleName();
-
-
-
+    private SessionManager session;
+    String username;
+    RecyclerView ownerrestaurant;
+    int restcount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_customer_home);
+        setContentView(R.layout.activity_owner_home);
+        session = SessionManager.INSTANCE;
+        username = session.getUniqueUserId();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference restaurants = database.getReference("Restaurants");
+        final ArrayList<String> allRestaurants = new ArrayList<>();
+        restaurants.orderByChild("ownerId").equalTo(username).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot a : dataSnapshot.getChildren()) {
+                    allRestaurants.add(a.getKey());
+                    ownerrestaurant = (RecyclerView) findViewById(R.id.ownerrestaurant);
+                    if (restcount <= 1) {
+                        ownerrestaurant.setLayoutManager(new LinearLayoutManager(OwnerHome.this));
+                    }
+                    ownerrestaurant.setAdapter(new SearchRestaurantViewAdapter(allRestaurants));
+                }
+            }
 
-        Log.d(LOG_TAG,"In Customer Home On Create");
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_owner_home, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_addrestaurant:
+                addRestaurant();
+                return true;
+            case R.id.action_checkrestaurant:
+                checkRestaurant();
+                return true;
+            case R.id.action_ownerlogout:
+                return true;
+        }
+
+        return true;
+    }
+
+    public void addRestaurant(){
+        Intent addNewRestaurant = new Intent(OwnerHome.this,AddNewRestaurant.class);
+        addNewRestaurant.putExtra("UserId",username);
+        startActivity(addNewRestaurant);
+    }
+
+    public void checkRestaurant(){
+        Intent checkRestaurant = new Intent(OwnerHome.this,CustomerHome.class);
+        startActivity(checkRestaurant);
     }
 }

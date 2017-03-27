@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,8 +23,10 @@ import org.w3c.dom.Text;
 
 import foodnow.foodnow.Activities.Search.NearbyRestaurantViewAdapter;
 import foodnow.foodnow.Activities.Search.NearbyRestaurants;
+import foodnow.foodnow.Activities.Sessions.SessionManager;
 import foodnow.foodnow.DatabaseModels.RestaurantDB;
 import foodnow.foodnow.DatabaseModels.RestaurantStatusDB;
+import foodnow.foodnow.Models.UserTypeEnum;
 import foodnow.foodnow.R;
 
 public class RestaurantStatus extends AppCompatActivity {
@@ -31,6 +36,8 @@ public class RestaurantStatus extends AppCompatActivity {
     TextView restaurantstatus;
     TextView restaurantwait;
     Button updateStatus;
+    UserTypeEnum usertype;
+    SessionManager session;
     long timestamp;
     int numberOfUpdates;
     @Override
@@ -44,6 +51,12 @@ public class RestaurantStatus extends AppCompatActivity {
         restaurantstatus = (TextView) findViewById(R.id.statusRestaurantStatus);
         restaurantwait = (TextView) findViewById(R.id.statusRestaurantWait);
         updateStatus = (Button) findViewById(R.id.statusUpdate);
+        session = SessionManager.INSTANCE;
+        usertype = session.getUsertype();
+        if (usertype == UserTypeEnum.CUSTOMER || usertype == UserTypeEnum.OWNER){
+            updateStatus.setVisibility(View.VISIBLE);
+        }
+
 
         Log.d(LOG_TAG,"In OnCreate of Restaurant Status");
 
@@ -94,5 +107,23 @@ public class RestaurantStatus extends AppCompatActivity {
                 v.getContext().startActivity(openRestaurant);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                return true;
+        }
+
+        return true;
     }
 }

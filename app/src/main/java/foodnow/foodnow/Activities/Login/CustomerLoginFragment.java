@@ -15,8 +15,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-//import com.example.aj.scavengersworld.Model.User;
 import foodnow.foodnow.Activities.Screens.CustomerHome;
 import foodnow.foodnow.Models.UserTypeEnum;
 import foodnow.foodnow.R;

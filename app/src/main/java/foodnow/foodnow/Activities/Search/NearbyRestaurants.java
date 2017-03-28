@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,6 +30,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import foodnow.foodnow.Activities.Screens.HomeScreen;
+import foodnow.foodnow.Activities.Sessions.SessionManager;
 import foodnow.foodnow.DatabaseModels.RestaurantDB;
 import foodnow.foodnow.R;
 
@@ -117,6 +120,7 @@ public class NearbyRestaurants extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_logout:
+                logout();
                 return true;
         }
 
@@ -150,5 +154,21 @@ public class NearbyRestaurants extends AppCompatActivity {
 
     public interface OnListFragmentInteractionListener{
         void onListAllHuntsFeedFragmentInteraction(RestaurantDB restaurant);
+    }
+    private void logout(){
+        FirebaseAuth.getInstance().signOut();
+        clearSession();
+        openHomeScreen();
+    }
+
+    private void openHomeScreen(){
+        Intent homeScreen = new Intent(this, HomeScreen.class);
+        homeScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(homeScreen);
+    }
+
+    private void clearSession(){
+        SessionManager sessionManager = SessionManager.INSTANCE;
+        sessionManager.clearSession();
     }
 }

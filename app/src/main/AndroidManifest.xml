@@ -72,7 +72,6 @@
         <activity android:name=".Activities.Search.PopularRestaurants" />
         <activity android:name=".Activities.Screens.OwnerHome" />
         <activity android:name=".Activities.Screens.AddNewRestaurant" />
-        <activity android:name=".Activities.Screens.BaseActivity"></activity>
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -121,9 +122,26 @@ public class RestaurantStatus extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_logout:
+                logout();
                 return true;
         }
 
         return true;
+    }
+    private void logout(){
+        FirebaseAuth.getInstance().signOut();
+        clearSession();
+        openHomeScreen();
+    }
+
+    private void openHomeScreen(){
+        Intent homeScreen = new Intent(this, HomeScreen.class);
+        homeScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(homeScreen);
+    }
+
+    private void clearSession(){
+        SessionManager sessionManager = SessionManager.INSTANCE;
+        sessionManager.clearSession();
     }
 }

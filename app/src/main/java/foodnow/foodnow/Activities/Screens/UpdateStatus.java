@@ -10,9 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import foodnow.foodnow.Activities.Sessions.SessionManager;
 import foodnow.foodnow.DatabaseModels.RestaurantStatusDB;
 import foodnow.foodnow.Models.CapacityStatusEnum;
 import foodnow.foodnow.Models.WaitStatusEnum;
@@ -107,9 +109,26 @@ public class UpdateStatus extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_logout:
+                logout();
                 return true;
         }
 
         return true;
+    }
+    private void logout(){
+        FirebaseAuth.getInstance().signOut();
+        clearSession();
+        openHomeScreen();
+    }
+
+    private void openHomeScreen(){
+        Intent homeScreen = new Intent(this, HomeScreen.class);
+        homeScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(homeScreen);
+    }
+
+    private void clearSession(){
+        SessionManager sessionManager = SessionManager.INSTANCE;
+        sessionManager.clearSession();
     }
 }

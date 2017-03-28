@@ -63,7 +63,7 @@ public class HomeScreen extends AppCompatActivity{
             mBtnGuest.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent guest = new Intent(HomeScreen.this,GuestHome.class);
+                    Intent guest = new Intent(HomeScreen.this,CustomerHome.class);
                     setupSession();
                     startActivity(guest);
 
@@ -94,7 +94,7 @@ public class HomeScreen extends AppCompatActivity{
             Log.d(LOG_TAG,"In Home On Destroy");
         }
 
-       
+
     private void setupSession(){
         SessionManager sessionManager = SessionManager.INSTANCE;
         sessionManager.setUpSession(null, null, UserTypeEnum.GUEST);

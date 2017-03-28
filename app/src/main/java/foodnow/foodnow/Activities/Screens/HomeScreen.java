@@ -63,7 +63,7 @@ public class HomeScreen extends AppCompatActivity{
             mBtnGuest.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent guest = new Intent(HomeScreen.this,CustomerHome.class);
+                    Intent guest = new Intent(HomeScreen.this,GuestHome.class);
                     setupSession();
                     startActivity(guest);
 

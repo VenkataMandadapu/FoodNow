@@ -1,5 +1,6 @@
 package foodnow.foodnow.Activities.Search;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -16,7 +18,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import foodnow.foodnow.Activities.Screens.HomeScreen;
 import foodnow.foodnow.Activities.Screens.RestaurantStatus;
+import foodnow.foodnow.Activities.Sessions.SessionManager;
 import foodnow.foodnow.DatabaseModels.RestaurantStatusDB;
 import foodnow.foodnow.R;
 
@@ -71,9 +75,26 @@ public class PopularRestaurants extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_logout:
+                logout();
                 return true;
         }
 
         return true;
+    }
+    private void logout(){
+        FirebaseAuth.getInstance().signOut();
+        clearSession();
+        openHomeScreen();
+    }
+
+    private void openHomeScreen(){
+        Intent homeScreen = new Intent(this, HomeScreen.class);
+        homeScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(homeScreen);
+    }
+
+    private void clearSession(){
+        SessionManager sessionManager = SessionManager.INSTANCE;
+        sessionManager.clearSession();
     }
 }

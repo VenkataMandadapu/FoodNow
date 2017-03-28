@@ -20,6 +20,7 @@ import foodnow.foodnow.Activities.Login.CustomerLogin;
 import foodnow.foodnow.Activities.Search.NearbyRestaurants;
 import foodnow.foodnow.Activities.Search.PopularRestaurants;
 import foodnow.foodnow.Activities.Search.SearchRestaurant;
+import foodnow.foodnow.Activities.Sessions.SessionManager;
 import foodnow.foodnow.R;
 
 
@@ -31,6 +32,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class CustomerHome extends AppCompatActivity {
     private final String LOG_TAG = getClass().getSimpleName();
@@ -100,6 +103,7 @@ public class CustomerHome extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_logout:
+                logout();
                 return true;
         }
 
@@ -130,4 +134,20 @@ public class CustomerHome extends AppCompatActivity {
         Log.d(LOG_TAG,"In Customer Home On Destroy");
     }
 
+    private void logout(){
+        FirebaseAuth.getInstance().signOut();
+        clearSession();
+        openHomeScreen();
+    }
+
+    private void openHomeScreen(){
+        Intent homeScreen = new Intent(this, HomeScreen.class);
+        homeScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(homeScreen);
+    }
+
+    private void clearSession(){
+        SessionManager sessionManager = SessionManager.INSTANCE;
+        sessionManager.clearSession();
+    }
 }

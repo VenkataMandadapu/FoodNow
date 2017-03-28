@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -78,6 +79,7 @@ public class OwnerHome extends AppCompatActivity {
                 checkRestaurant();
                 return true;
             case R.id.action_ownerlogout:
+                logout();
                 return true;
         }
 
@@ -93,5 +95,21 @@ public class OwnerHome extends AppCompatActivity {
     public void checkRestaurant(){
         Intent checkRestaurant = new Intent(OwnerHome.this,CustomerHome.class);
         startActivity(checkRestaurant);
+    }
+    private void logout(){
+        FirebaseAuth.getInstance().signOut();
+        clearSession();
+        openHomeScreen();
+    }
+
+    private void openHomeScreen(){
+        Intent homeScreen = new Intent(this, HomeScreen.class);
+        homeScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(homeScreen);
+    }
+
+    private void clearSession(){
+        SessionManager sessionManager = SessionManager.INSTANCE;
+        sessionManager.clearSession();
     }
 }

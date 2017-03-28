@@ -84,4 +84,5 @@ public class NearbyRestaurantViewAdapter extends RecyclerView.Adapter<NearbyRest
             return super.toString() + " '" + mRestaurantName.getText();
         }
     }
+
 }

@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_margin="5dp"
         android:layout_height="wrap_content"
+        android:checkedButton="@+id/statusLow"
         android:id="@+id/statusRadioGroup" >
 
         <RadioButton
@@ -63,6 +64,7 @@
         android:layout_width="match_parent"
         android:layout_margin="5dp"
         android:layout_height="wrap_content"
+        android:checkedButton="@+id/statusWait0"
         android:id="@+id/waitRadioGroup" >
 
         <RadioButton

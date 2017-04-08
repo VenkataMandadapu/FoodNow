@@ -239,7 +239,10 @@ public class OwnerSignupFragment extends Fragment implements View.OnClickListene
 
     private void openHomeScreenOwnerSignup(){
         Intent homeScreen = new Intent(getActivity(), OwnerHome.class);
+        homeScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        homeScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(homeScreen);
+        getActivity().finish();
     }
 
     private void setupSession(){

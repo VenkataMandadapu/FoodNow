@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 
+
 /**
  * Created by vinee on 3/18/2017.
  */
@@ -27,6 +28,8 @@ public class HomeScreen extends AppCompatActivity{
         Button mBtnCustomer;
         Button mBtnOwner;
         Button mBtnGuest;
+        SessionManager session;
+        UserTypeEnum usertype;
         private final String LOG_TAG = getClass().getSimpleName();
 
         @Override
@@ -40,12 +43,33 @@ public class HomeScreen extends AppCompatActivity{
             setSupportActionBar(toolbar);
             Log.d(LOG_TAG,"In Home On Create");
 
+            session = SessionManager.INSTANCE;
+            usertype = session.getUsertype();
+            if (usertype != null){
+                if (usertype == UserTypeEnum.CUSTOMER) {
+                    Intent homeScreen = new Intent(this, CustomerHome.class);
+                    homeScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    homeScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(homeScreen);
+                    finish();
+                }
+                else if (usertype == UserTypeEnum.OWNER) {
+                    Intent homeScreen = new Intent(this, OwnerHome.class);
+                    homeScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    homeScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(homeScreen);
+                    finish();
+                }
+
+            }
+
 
             mBtnCustomer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent customer_login = new Intent(HomeScreen.this,CustomerLogin.class);
                     startActivity(customer_login);
+                    finish();
 
 
                 }
@@ -56,6 +80,7 @@ public class HomeScreen extends AppCompatActivity{
                 public void onClick(View view) {
                     Intent owner_login = new Intent(HomeScreen.this,OwnerLogin.class);
                     startActivity(owner_login);
+                    finish();
 
                 }
             });
@@ -95,10 +120,10 @@ public class HomeScreen extends AppCompatActivity{
         }
 
 
-    private void setupSession(){
-        SessionManager sessionManager = SessionManager.INSTANCE;
-        sessionManager.setUpSession(null, null, UserTypeEnum.GUEST);
-    }
+        private void setupSession(){
+            SessionManager sessionManager = SessionManager.INSTANCE;
+            sessionManager.setUpSession(null, null, UserTypeEnum.GUEST);
+        }
 
 }
 

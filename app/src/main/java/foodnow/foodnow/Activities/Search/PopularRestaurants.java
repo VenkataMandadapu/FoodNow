@@ -22,15 +22,22 @@ import foodnow.foodnow.Activities.Screens.HomeScreen;
 import foodnow.foodnow.Activities.Screens.RestaurantStatus;
 import foodnow.foodnow.Activities.Sessions.SessionManager;
 import foodnow.foodnow.DatabaseModels.RestaurantStatusDB;
+import foodnow.foodnow.Models.UserTypeEnum;
 import foodnow.foodnow.R;
 
 public class PopularRestaurants extends AppCompatActivity {
     RecyclerView popularview;
     int nearbycount;
     private NearbyRestaurants.OnListFragmentInteractionListener mListener;
+    SessionManager session;
+    UserTypeEnum usertype;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        session = SessionManager.INSTANCE;
+        usertype = session.getUsertype();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popular_restaurants);
         final ArrayList<RestaurantStatusDB> popularRestaurants = new ArrayList<>();
@@ -65,8 +72,10 @@ public class PopularRestaurants extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+        if(usertype != UserTypeEnum.GUEST) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu, menu);
+        }
         return true;
     }
 

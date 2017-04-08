@@ -21,6 +21,7 @@ import foodnow.foodnow.Activities.Search.NearbyRestaurants;
 import foodnow.foodnow.Activities.Search.PopularRestaurants;
 import foodnow.foodnow.Activities.Search.SearchRestaurant;
 import foodnow.foodnow.Activities.Sessions.SessionManager;
+import foodnow.foodnow.Models.UserTypeEnum;
 import foodnow.foodnow.R;
 
 
@@ -40,12 +41,21 @@ public class CustomerHome extends AppCompatActivity {
     Button mBtnSearchRestaurant;
     Button mBtnNearbyRestaurant;
     Button mBtnPopularRestaurant;
-    String usertype;
+    SessionManager session;
+    UserTypeEnum usertype;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_home);
+        session = SessionManager.INSTANCE;
+        usertype = session.getUsertype();
+
+        if(usertype == UserTypeEnum.CUSTOMER || usertype == UserTypeEnum.OWNER) {
+            setContentView(R.layout.activity_customer_home);
+        }
+        else if (usertype == UserTypeEnum.GUEST) {
+            setContentView(R.layout.activity_guest_home);
+        }
 
         Log.d(LOG_TAG,"In Customer Home On Create");
 
@@ -93,8 +103,10 @@ public class CustomerHome extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+        if(usertype != UserTypeEnum.GUEST) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu, menu);
+        }
         return true;
     }
 
@@ -149,5 +161,10 @@ public class CustomerHome extends AppCompatActivity {
     private void clearSession(){
         SessionManager sessionManager = SessionManager.INSTANCE;
         sessionManager.clearSession();
+    }
+
+    public void onBackPressed(){
+        super.onBackPressed();
+        finish();
     }
 }

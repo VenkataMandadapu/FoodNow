@@ -28,6 +28,7 @@ import foodnow.foodnow.Activities.Screens.HomeScreen;
 import foodnow.foodnow.Activities.Sessions.SessionManager;
 import foodnow.foodnow.DatabaseModels.RestaurantDB;
 import foodnow.foodnow.Models.LocationCoordinates;
+import foodnow.foodnow.Models.UserTypeEnum;
 import foodnow.foodnow.R;
 
 public class SearchRestaurant extends AppCompatActivity {
@@ -35,8 +36,14 @@ public class SearchRestaurant extends AppCompatActivity {
     private final String LOG_TAG = getClass().getSimpleName();
     RecyclerView searchview;
     int searchcount = 1;
+    SessionManager session;
+    UserTypeEnum usertype;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        session = SessionManager.INSTANCE;
+        usertype = session.getUsertype();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_restaurant);
         textstring = (EditText) findViewById(R.id.searchRestaurant);
@@ -96,8 +103,10 @@ public class SearchRestaurant extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+        if(usertype != UserTypeEnum.GUEST) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu, menu);
+        }
         return true;
     }
 

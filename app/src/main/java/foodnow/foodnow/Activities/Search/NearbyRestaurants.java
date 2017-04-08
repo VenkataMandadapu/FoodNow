@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import foodnow.foodnow.Activities.Screens.HomeScreen;
 import foodnow.foodnow.Activities.Sessions.SessionManager;
 import foodnow.foodnow.DatabaseModels.RestaurantDB;
+import foodnow.foodnow.Models.UserTypeEnum;
 import foodnow.foodnow.R;
 
 public class NearbyRestaurants extends AppCompatActivity {
@@ -42,9 +43,15 @@ public class NearbyRestaurants extends AppCompatActivity {
     RecyclerView nearbyview;
     private int nearbycount = 1;
     private OnListFragmentInteractionListener mListener;
+    SessionManager session;
+    UserTypeEnum usertype;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        session = SessionManager.INSTANCE;
+        usertype = session.getUsertype();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nearby_restaurants);
         final ArrayList<RestaurantDB> nearbyRestaurants = new ArrayList<>();
@@ -110,8 +117,10 @@ public class NearbyRestaurants extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+        if(usertype != UserTypeEnum.GUEST) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu, menu);
+        }
         return true;
     }
 

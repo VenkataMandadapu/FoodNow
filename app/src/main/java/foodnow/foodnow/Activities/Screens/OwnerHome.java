@@ -112,4 +112,9 @@ public class OwnerHome extends AppCompatActivity {
         SessionManager sessionManager = SessionManager.INSTANCE;
         sessionManager.clearSession();
     }
+
+    public void onBackPressed(){
+        super.onBackPressed();
+        finish();
+    }
 }

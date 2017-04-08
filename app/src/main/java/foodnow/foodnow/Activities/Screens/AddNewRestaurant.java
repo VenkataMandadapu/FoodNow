@@ -20,6 +20,7 @@ import foodnow.foodnow.DatabaseModels.RestaurantDB;
 import foodnow.foodnow.DatabaseModels.RestaurantStatusDB;
 import foodnow.foodnow.Models.CapacityStatusEnum;
 import foodnow.foodnow.Models.LocationCoordinates;
+import foodnow.foodnow.Models.UserTypeEnum;
 import foodnow.foodnow.Models.WaitStatusEnum;
 import foodnow.foodnow.R;
 
@@ -31,6 +32,9 @@ public class AddNewRestaurant extends AppCompatActivity {
     EditText restname;
     EditText restaddress;
     EditText restphone;
+    SessionManager session;
+    UserTypeEnum usertype;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +47,9 @@ public class AddNewRestaurant extends AppCompatActivity {
         restlatitude = (EditText) findViewById(R.id.addrestaurant_latitude);
         restlongitude = (EditText) findViewById(R.id.addrestaurant_longitude) ;
         String username = getIntent().getStringExtra("UserId");
+
+        session = SessionManager.INSTANCE;
+        usertype = session.getUsertype();
 
         addnewRestuarant.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,8 +84,10 @@ public class AddNewRestaurant extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+        if(usertype != UserTypeEnum.GUEST) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu, menu);
+        }
         return true;
     }
 
@@ -104,6 +113,7 @@ public class AddNewRestaurant extends AppCompatActivity {
         Intent homeScreen = new Intent(this, HomeScreen.class);
         homeScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(homeScreen);
+
     }
 
     private void clearSession(){

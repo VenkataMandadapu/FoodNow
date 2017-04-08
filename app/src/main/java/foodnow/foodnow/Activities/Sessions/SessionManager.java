@@ -78,6 +78,7 @@ public enum SessionManager {
         this.mUserEmail = null;
         this.mUserName = null;
         this.mUniqueUserId = null;
+        this.usertype = null;
         this.mContext = null;
 
 

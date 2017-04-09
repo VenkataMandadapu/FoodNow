@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -75,44 +76,46 @@ public class NearbyRestaurants extends AppCompatActivity {
         if (!isLocationEnabled()) {
             showAlert();
         }
-        final Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
-        Log.d(LOG_TAG,"LastKnown :"+lastKnownLocation.toString());
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference restaurants = database.getReference("Restaurants");
-        restaurants.orderByValue().addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot a : dataSnapshot.getChildren()){
-                    Log.d(LOG_TAG,a.getKey());
-                    RestaurantDB details = a.getValue(RestaurantDB.class);
-                    int r = 6371; // average radius of the earth in km
-                    double dLat = Math.toRadians(details.getCoordinates().getLatitude() - lastKnownLocation.getLatitude());
-                    double dLon = Math.toRadians(details.getCoordinates().getLongitude() - lastKnownLocation.getLongitude());
-                    double dist = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                            Math.cos(Math.toRadians(lastKnownLocation.getLatitude())) * Math.cos(Math.toRadians(details.getCoordinates().getLatitude()))
-                                    * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-                    double c = 2 * Math.atan2(Math.sqrt(dist), Math.sqrt(1 - dist));
-                    double distance = r * c * 0.62; //Converting km to miles
-                    Log.d(LOG_TAG,Double.toString(distance));
-                    if (distance < 2){
-                        details.setDistance(Math.round(distance * 100.0)/100.0);
-                        nearbyRestaurants.add(details);
+        else {
+            final Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
+            Log.d(LOG_TAG, "LastKnown :" + lastKnownLocation.toString());
+            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+            final DatabaseReference restaurants = database.getReference("Restaurants");
+            restaurants.orderByValue().addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot a : dataSnapshot.getChildren()) {
+                        Log.d(LOG_TAG, a.getKey());
+                        RestaurantDB details = a.getValue(RestaurantDB.class);
+                        int r = 6371; // average radius of the earth in km
+                        double dLat = Math.toRadians(details.getCoordinates().getLatitude() - lastKnownLocation.getLatitude());
+                        double dLon = Math.toRadians(details.getCoordinates().getLongitude() - lastKnownLocation.getLongitude());
+                        double dist = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                                Math.cos(Math.toRadians(lastKnownLocation.getLatitude())) * Math.cos(Math.toRadians(details.getCoordinates().getLatitude()))
+                                        * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+                        double c = 2 * Math.atan2(Math.sqrt(dist), Math.sqrt(1 - dist));
+                        double distance = r * c * 0.62; //Converting km to miles
+                        Log.d(LOG_TAG, Double.toString(distance));
+                        if (distance < 2) {
+                            details.setDistance(Math.round(distance * 100.0) / 100.0);
+                            nearbyRestaurants.add(details);
 
+                        }
                     }
+
+                    nearbyview = (RecyclerView) findViewById(R.id.nearbyview);
+                    if (nearbycount <= 1) {
+                        nearbyview.setLayoutManager(new LinearLayoutManager(NearbyRestaurants.this));
+                    }
+                    nearbyview.setAdapter(new NearbyRestaurantViewAdapter(nearbyRestaurants, mListener));
                 }
 
-                nearbyview = (RecyclerView) findViewById(R.id.nearbyview);
-                if (nearbycount <= 1){
-                    nearbyview.setLayoutManager(new LinearLayoutManager(NearbyRestaurants.this));
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
                 }
-                nearbyview.setAdapter(new NearbyRestaurantViewAdapter(nearbyRestaurants,mListener));
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+            });
+        }
     }
 
     @Override
@@ -142,10 +145,12 @@ public class NearbyRestaurants extends AppCompatActivity {
     }
 
     private void showAlert() {
+        Toast.makeText(this,"Enable GPS",Toast.LENGTH_SHORT).show();
         final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Enable Location")
                 .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to " +
                         "use this app")
+                .setCancelable(false)
                 .setPositiveButton("Location Settings", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface paramDialogInterface, int paramInt) {
@@ -156,9 +161,13 @@ public class NearbyRestaurants extends AppCompatActivity {
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                        paramDialogInterface.cancel();
+                        finish();
+                        System.exit(0);
                     }
                 });
-        dialog.show();
+        AlertDialog alert = dialog.create();
+        alert.show();
     }
 
     public interface OnListFragmentInteractionListener{

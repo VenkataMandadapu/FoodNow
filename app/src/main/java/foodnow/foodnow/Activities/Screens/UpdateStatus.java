@@ -42,6 +42,8 @@ public class UpdateStatus extends AppCompatActivity {
         timestamp = getIntent().getExtras().getLong("Timestamp");
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference statusdatabase = database.getReference("Status"+"/"+s);
+        restaurantStatus = CapacityStatusEnum.LOW;
+        restaurantWaitTime = WaitStatusEnum.WAIT_0;
 
         statusradiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

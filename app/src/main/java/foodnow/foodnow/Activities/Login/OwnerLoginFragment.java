@@ -76,7 +76,7 @@ public class OwnerLoginFragment extends Fragment implements View.OnClickListener
             firebaseAuthWithFacebook(loginResult.getAccessToken());
 //            AccessToken accessToken = loginResult.getAccessToken();
             Profile profile = Profile.getCurrentProfile();
-            displayWelcomeMessage(profile);
+            //displayWelcomeMessage(profile);
         }
 
         @Override
@@ -121,7 +121,7 @@ public class OwnerLoginFragment extends Fragment implements View.OnClickListener
         mProfileTracker = new ProfileTracker() {
             @Override
             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
-                displayWelcomeMessage(currentProfile);
+               // displayWelcomeMessage(currentProfile);
             }
         };
 
@@ -267,7 +267,7 @@ public class OwnerLoginFragment extends Fragment implements View.OnClickListener
         super.onResume();
         Log.d(LOG_TAG, "onResume() called");
         Profile profile = Profile.getCurrentProfile();
-        displayWelcomeMessage(profile);
+       // displayWelcomeMessage(profile);
     }
 
     @Override

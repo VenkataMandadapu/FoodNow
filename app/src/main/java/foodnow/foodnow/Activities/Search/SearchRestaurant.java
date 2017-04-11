@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -123,6 +124,7 @@ public class SearchRestaurant extends AppCompatActivity {
     }
     private void logout(){
         FirebaseAuth.getInstance().signOut();
+        LoginManager.getInstance().logOut();
         clearSession();
         openHomeScreen();
     }
@@ -131,6 +133,7 @@ public class SearchRestaurant extends AppCompatActivity {
         Intent homeScreen = new Intent(this, HomeScreen.class);
         homeScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(homeScreen);
+        finish();
     }
 
     private void clearSession(){

@@ -49,18 +49,6 @@
 
         <!-- FACEBOOK STUFF - END -->
 
-        <activity
-            android:name=".add_restaurant"
-            android:label="@string/title_activity_add_restaurant"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".restaurant_list"
-            android:label="@string/title_activity_restaurant_list"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".occupany"
-            android:label="@string/title_activity_occupany"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.Login.CustomerLogin" />
         <activity android:name=".Activities.Screens.CustomerHome" />
         <activity android:name=".Activities.Login.OwnerLogin" />

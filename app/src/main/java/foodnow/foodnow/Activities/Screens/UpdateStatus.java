@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
 
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -119,6 +120,7 @@ public class UpdateStatus extends AppCompatActivity {
     }
     private void logout(){
         FirebaseAuth.getInstance().signOut();
+        LoginManager.getInstance().logOut();
         clearSession();
         openHomeScreen();
     }
@@ -127,6 +129,7 @@ public class UpdateStatus extends AppCompatActivity {
         Intent homeScreen = new Intent(this, HomeScreen.class);
         homeScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(homeScreen);
+        finish();
     }
 
     private void clearSession(){

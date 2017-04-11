@@ -34,6 +34,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class CustomerHome extends AppCompatActivity {
@@ -148,6 +149,7 @@ public class CustomerHome extends AppCompatActivity {
 
     private void logout(){
         FirebaseAuth.getInstance().signOut();
+        LoginManager.getInstance().logOut();
         clearSession();
         openHomeScreen();
     }
@@ -156,6 +158,7 @@ public class CustomerHome extends AppCompatActivity {
         Intent homeScreen = new Intent(this, HomeScreen.class);
         homeScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(homeScreen);
+        finish();
     }
 
     private void clearSession(){

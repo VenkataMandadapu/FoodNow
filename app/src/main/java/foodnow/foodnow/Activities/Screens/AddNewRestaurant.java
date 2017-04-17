@@ -17,6 +17,7 @@ import android.widget.EditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.facebook.login.LoginManager;
 
 import foodnow.foodnow.Activities.Sessions.SessionManager;
 import foodnow.foodnow.DatabaseModels.RestaurantDB;
@@ -60,6 +61,7 @@ public class AddNewRestaurant extends AppCompatActivity {
                 RestaurantDB restaurant = new RestaurantDB();
                 RestaurantStatusDB reststatus = new RestaurantStatusDB();
                 LocationCoordinates location = new LocationCoordinates();
+
                 if ((restname.getText().toString() == null) || (restname.getText().toString() == null) || (restphone.getText().toString() == null) || (restcuisine.getText().toString() == null) || (restlongitude.getText().toString() == null) || (restlatitude.getText().toString() == null)) {
                     restaurant.setName(restname.getText().toString());
                     restaurant.setAddress(restaddress.getText().toString());
@@ -116,6 +118,7 @@ public class AddNewRestaurant extends AppCompatActivity {
 
     private void logout(){
         FirebaseAuth.getInstance().signOut();
+        LoginManager.getInstance().logOut();
         clearSession();
         openHomeScreen();
     }
@@ -124,6 +127,7 @@ public class AddNewRestaurant extends AppCompatActivity {
         Intent homeScreen = new Intent(this, HomeScreen.class);
         homeScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(homeScreen);
+        finish();
 
     }
 

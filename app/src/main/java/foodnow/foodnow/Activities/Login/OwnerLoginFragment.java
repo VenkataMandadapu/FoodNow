@@ -403,7 +403,7 @@ public class OwnerLoginFragment extends Fragment implements View.OnClickListener
         homeScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         homeScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(homeScreen);
-        getActivity().finish();
+        //getActivity().finish();
     }
 
     @Override

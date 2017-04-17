@@ -1,7 +1,10 @@
 package foodnow.foodnow.Activities.Screens;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.provider.Settings;
 import android.support.annotation.StringDef;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -57,27 +60,35 @@ public class AddNewRestaurant extends AppCompatActivity {
                 RestaurantDB restaurant = new RestaurantDB();
                 RestaurantStatusDB reststatus = new RestaurantStatusDB();
                 LocationCoordinates location = new LocationCoordinates();
-                restaurant.setName(restname.getText().toString());
-                restaurant.setAddress(restaddress.getText().toString());
-                restaurant.setPhone(restphone.getText().toString());
-                restaurant.setCuisine(restcuisine.getText().toString());
-                location.setLongitude(Double.parseDouble(restlongitude.getText().toString()));
-                location.setLatitude(Double.parseDouble(restlatitude.getText().toString()));
-                restaurant.setCoordinates(location);
-                restaurant.setOwnerId(getIntent().getStringExtra("UserId"));
-                reststatus.setName(restname.getText().toString());
-                reststatus.setNumberOfUpdates(1);
-                reststatus.setTimeStamp(System.currentTimeMillis());
-                reststatus.setWaitStatus(WaitStatusEnum.WAIT_0);
-                reststatus.setCapacityStatus(CapacityStatusEnum.LOW);
-                final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                final DatabaseReference restaurants = database.getReference("Restaurants/"+restaurant.getName());
-                final DatabaseReference status = database.getReference("Status/"+restaurant.getName());
-                restaurants.setValue(restaurant);
-                status.setValue(reststatus);
-                Intent openowner = new Intent(AddNewRestaurant.this,OwnerHome.class);
-                openowner.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(openowner);
+                if ((restname.getText().toString() == null) || (restname.getText().toString() == null) || (restphone.getText().toString() == null) || (restcuisine.getText().toString() == null) || (restlongitude.getText().toString() == null) || (restlatitude.getText().toString() == null)) {
+                    restaurant.setName(restname.getText().toString());
+                    restaurant.setAddress(restaddress.getText().toString());
+                    restaurant.setPhone(restphone.getText().toString());
+                    restaurant.setCuisine(restcuisine.getText().toString());
+                    location.setLongitude(Double.parseDouble(restlongitude.getText().toString()));
+                    location.setLatitude(Double.parseDouble(restlatitude.getText().toString()));
+                    restaurant.setCoordinates(location);
+                    restaurant.setOwnerId(getIntent().getStringExtra("UserId"));
+                    reststatus.setName(restname.getText().toString());
+                    reststatus.setNumberOfUpdates(1);
+                    reststatus.setTimeStamp(System.currentTimeMillis());
+                    reststatus.setWaitStatus(WaitStatusEnum.WAIT_0);
+                    reststatus.setCapacityStatus(CapacityStatusEnum.LOW);
+                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    final DatabaseReference restaurants = database.getReference("Restaurants/" + restaurant.getName());
+                    final DatabaseReference status = database.getReference("Status/" + restaurant.getName());
+                    restaurants.setValue(restaurant);
+                    status.setValue(reststatus);
+                    Intent openowner = new Intent(AddNewRestaurant.this, OwnerHome.class);
+                    openowner.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(openowner);
+                } else {
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(AddNewRestaurant.this);
+                    dialog.setTitle("Empty Fields")
+                            .setMessage("Please fill all the fields");
+                    AlertDialog alert = dialog.create();
+                    alert.show();
+                }
             }
         });
     }

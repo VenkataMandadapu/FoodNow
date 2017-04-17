@@ -404,7 +404,7 @@ public class CustomerLoginFragment extends Fragment implements View.OnClickListe
         homeScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         homeScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(homeScreen);
-        getActivity().finish();
+        //getActivity().finish();
     }
 
     @Override

@@ -242,7 +242,7 @@ public class CustomerSignupFragment extends Fragment implements View.OnClickList
         homeScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         homeScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(homeScreen);
-        getActivity().finish();
+        //getActivity().finish();
 
     }
 

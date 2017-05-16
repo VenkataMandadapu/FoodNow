@@ -4,10 +4,15 @@ package foodnow.foodnow.Activities.Screens;
  * Created by vinee on 3/19/2017.
  */
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -33,6 +38,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,6 +62,10 @@ public class CustomerHome extends AppCompatActivity {
         }
         else if (usertype == UserTypeEnum.GUEST) {
             setContentView(R.layout.activity_guest_home);
+            if(!isOnline()) {
+                handleOffline();
+            }
+
         }
 
         Log.d(LOG_TAG,"In Customer Home On Create");
@@ -121,6 +131,49 @@ public class CustomerHome extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    public boolean isOnline() {
+        boolean connected = false;
+        try {
+            ConnectivityManager connectivityManager = (ConnectivityManager)
+                    getSystemService(CONNECTIVITY_SERVICE);
+
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            connected = networkInfo != null && networkInfo.isAvailable() &&
+                    networkInfo.isConnected();
+            return connected;
+
+
+        } catch (Exception e) {
+            System.out.println("CheckConnectivity Exception: " + e.getMessage());
+            Log.v("connectivity", e.toString());
+        }
+        return connected;
+    }
+
+    private void handleOffline(){
+        Toast.makeText(this,getString(R.string.offline_toast),Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage(getString(R.string.offline_display_message))
+                .setCancelable(false);
+        alertDialogBuilder.setPositiveButton(getString(R.string.offline_goto_settings), new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface dialog, int id){
+                startActivityForResult(new Intent(Settings.ACTION_WIFI_SETTINGS), 3);
+
+            }
+        });
+        alertDialogBuilder.setNegativeButton(getString(R.string.offline_close_app),
+                new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int id){
+                        dialog.cancel();
+                        finish();
+                        System.exit(0);
+                        //openHomeScreen();
+                    }
+                });
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
     }
 
     @Override

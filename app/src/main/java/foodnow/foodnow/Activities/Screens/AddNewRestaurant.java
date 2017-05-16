@@ -61,35 +61,50 @@ public class AddNewRestaurant extends AppCompatActivity {
                 RestaurantDB restaurant = new RestaurantDB();
                 RestaurantStatusDB reststatus = new RestaurantStatusDB();
                 LocationCoordinates location = new LocationCoordinates();
+                String restaurantname = restname.getText().toString();
+                String restaurantaddress = restaddress.getText().toString();
+                String restaurantphone = restphone.getText().toString();
+                String restaurantcuisine = restcuisine.getText().toString();
+                String restaurantlongitude = restlongitude.getText().toString();
+                String restaurantlatitude = restlatitude.getText().toString();
 
-                if ((restname.getText().toString() == null) || (restname.getText().toString() == null) || (restphone.getText().toString() == null) || (restcuisine.getText().toString() == null) || (restlongitude.getText().toString() == null) || (restlatitude.getText().toString() == null)) {
-                    restaurant.setName(restname.getText().toString());
-                    restaurant.setAddress(restaddress.getText().toString());
-                    restaurant.setPhone(restphone.getText().toString());
-                    restaurant.setCuisine(restcuisine.getText().toString());
-                    location.setLongitude(Double.parseDouble(restlongitude.getText().toString()));
-                    location.setLatitude(Double.parseDouble(restlatitude.getText().toString()));
-                    restaurant.setCoordinates(location);
-                    restaurant.setOwnerId(getIntent().getStringExtra("UserId"));
-                    reststatus.setName(restname.getText().toString());
-                    reststatus.setNumberOfUpdates(1);
-                    reststatus.setTimeStamp(System.currentTimeMillis());
-                    reststatus.setWaitStatus(WaitStatusEnum.WAIT_0);
-                    reststatus.setCapacityStatus(CapacityStatusEnum.LOW);
-                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    final DatabaseReference restaurants = database.getReference("Restaurants/" + restaurant.getName());
-                    final DatabaseReference status = database.getReference("Status/" + restaurant.getName());
-                    restaurants.setValue(restaurant);
-                    status.setValue(reststatus);
-                    Intent openowner = new Intent(AddNewRestaurant.this, OwnerHome.class);
-                    openowner.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(openowner);
-                } else {
+
+                if(restaurantname.isEmpty() || restaurantaddress.isEmpty() || restaurantcuisine.isEmpty() || restaurantphone.isEmpty() || restaurantlongitude.isEmpty() || restaurantlatitude.isEmpty()) {
                     final AlertDialog.Builder dialog = new AlertDialog.Builder(AddNewRestaurant.this);
                     dialog.setTitle("Empty Fields")
                             .setMessage("Please fill all the fields");
                     AlertDialog alert = dialog.create();
                     alert.show();
+                } else {
+                    try {
+                        restaurant.setName(restaurantname);
+                        restaurant.setAddress(restaurantaddress);
+                        restaurant.setPhone(restaurantphone);
+                        restaurant.setCuisine(restaurantcuisine);
+                        location.setLongitude(Double.parseDouble(restaurantlongitude));
+                        location.setLatitude(Double.parseDouble(restaurantlatitude));
+                        restaurant.setCoordinates(location);
+                        restaurant.setOwnerId(getIntent().getStringExtra("UserId"));
+                        reststatus.setName(restname.getText().toString());
+                        reststatus.setNumberOfUpdates(1);
+                        reststatus.setTimeStamp(System.currentTimeMillis());
+                        reststatus.setWaitStatus(WaitStatusEnum.WAIT_0);
+                        reststatus.setCapacityStatus(CapacityStatusEnum.LOW);
+                        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        final DatabaseReference restaurants = database.getReference("Restaurants/" + restaurant.getName());
+                        final DatabaseReference status = database.getReference("Status/" + restaurant.getName());
+                        restaurants.setValue(restaurant);
+                        status.setValue(reststatus);
+                        Intent openowner = new Intent(AddNewRestaurant.this, OwnerHome.class);
+                        openowner.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(openowner);
+                    }
+                    catch(NumberFormatException e){
+                        final AlertDialog.Builder dialog = new AlertDialog.Builder(AddNewRestaurant.this);
+                        dialog.setTitle("Enter numbers into Latitude and Longitude");
+                        AlertDialog alert = dialog.create();
+                        alert.show();
+                    }
                 }
             }
         });

@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
@@ -32,6 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import foodnow.foodnow.Activities.Screens.CustomerHome;
 import foodnow.foodnow.Activities.Screens.HomeScreen;
 import foodnow.foodnow.Activities.Sessions.SessionManager;
 import foodnow.foodnow.DatabaseModels.RestaurantDB;
@@ -74,7 +77,10 @@ public class NearbyRestaurants extends AppCompatActivity {
                     .show();
             return;
         }
-        if (!isLocationEnabled()) {
+        if(!isOnline()) {
+            handleOffline();
+        }
+        else if (!isLocationEnabled()) {
             showAlert();
         }
         else {
@@ -162,12 +168,64 @@ public class NearbyRestaurants extends AppCompatActivity {
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                        paramDialogInterface.cancel();
+                        Intent homeScreen = new Intent(NearbyRestaurants.this, CustomerHome.class);
+                        homeScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        homeScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(homeScreen);
+                        //paramDialogInterface.cancel();
                         finish();
-                        System.exit(0);
+                        //System.exit(0);
                     }
                 });
         AlertDialog alert = dialog.create();
+        alert.show();
+    }
+
+    public boolean isOnline() {
+        boolean connected = false;
+        try {
+            ConnectivityManager connectivityManager = (ConnectivityManager)
+                    getSystemService(CONNECTIVITY_SERVICE);
+
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            connected = networkInfo != null && networkInfo.isAvailable() &&
+                    networkInfo.isConnected();
+            return connected;
+
+
+        } catch (Exception e) {
+            System.out.println("CheckConnectivity Exception: " + e.getMessage());
+            Log.v("connectivity", e.toString());
+        }
+        return connected;
+    }
+
+    private void handleOffline(){
+        Toast.makeText(this,getString(R.string.offline_toast),Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage(getString(R.string.offline_display_message))
+                .setCancelable(false);
+        alertDialogBuilder.setPositiveButton(getString(R.string.offline_goto_settings), new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface dialog, int id){
+                startActivityForResult(new Intent(Settings.ACTION_WIFI_SETTINGS), 3);
+
+            }
+        });
+        alertDialogBuilder.setNegativeButton(getString(R.string.offline_close_app),
+                new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int id){
+                        Intent homeScreen = new Intent(NearbyRestaurants.this, CustomerHome.class);
+                        homeScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        homeScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(homeScreen);
+                        finish();
+                        //dialog.cancel();
+                        //finish();
+                        //System.exit(0);
+                        //openHomeScreen();
+                    }
+                });
+        AlertDialog alert = alertDialogBuilder.create();
         alert.show();
     }
 

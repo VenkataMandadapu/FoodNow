@@ -90,11 +90,15 @@ public class OwnerHome extends AppCompatActivity {
     public void addRestaurant(){
         Intent addNewRestaurant = new Intent(OwnerHome.this,AddNewRestaurant.class);
         addNewRestaurant.putExtra("UserId",username);
+        addNewRestaurant.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        addNewRestaurant.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(addNewRestaurant);
     }
 
     public void checkRestaurant(){
         Intent checkRestaurant = new Intent(OwnerHome.this,CustomerHome.class);
+        checkRestaurant.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        checkRestaurant.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(checkRestaurant);
     }
     private void logout(){

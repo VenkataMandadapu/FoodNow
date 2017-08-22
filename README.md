@@ -9,5 +9,3 @@ Restaurant patrons, owners who like to publicize their restaurant for low wait t
 FB and Google plus log in API’s.
 # Sensors 
 GPS
-
-This is application is still in the process of getting made. Please check back later once it is done.
